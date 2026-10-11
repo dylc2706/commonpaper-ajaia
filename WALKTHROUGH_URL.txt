@@ -1,0 +1,3 @@
+PENDING — WALKTHROUGH VIDEO REQUIRED
+
+Record a 3–5 minute walkthrough, upload as an unlisted Loom or YouTube video, then replace this file with the real URL. Use docs/WALKTHROUGH_SCRIPT.md as the outline.

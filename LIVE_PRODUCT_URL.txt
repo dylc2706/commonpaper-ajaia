@@ -1,0 +1,5 @@
+PENDING — PUBLIC DEPLOYMENT REQUIRED
+
+After deploying Commonpaper to a public ASGI host, replace this file with the actual application URL. Verify that the home page loads, /health responds successfully, and document creation, editing, persistence, import, and sharing work on the hosted instance.
+
+The in-chat preview is not the public deployment URL.

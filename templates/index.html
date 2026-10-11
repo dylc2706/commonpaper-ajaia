@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f9fc">
+  <meta name="description" content="A calm, lightweight shared document workspace.">
+  <title>Commonpaper — a shared workspace</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body data-mode="server">
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 5.5h10.5L25 12v14H8z"/><path d="M18.5 5.5V12H25M12 17h9M12 21h9"/></svg></div>
+        <span class="brand-name">commonpaper</span>
+        <button class="icon-button sidebar-collapse" id="closeSidebar" aria-label="Close navigation" title="Close navigation"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      </div>
+
+      <button class="workspace-switch" id="workspaceSwitch" aria-label="Switch demo user">
+        <span class="workspace-symbol">C</span>
+        <span class="workspace-copy"><strong>Collective</strong><small>Demo workspace</small></span>
+        <svg class="chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></svg>
+      </button>
+      <div class="sidebar-label-row"><span>WORKSPACE</span><span class="tiny-dot"></span></div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <button class="nav-link active" id="ownedNav"><svg viewBox="0 0 24 24"><path d="M5 4.75h9l5 5V20H5z"/><path d="M14 4.75V10h5M8.5 13.5h7M8.5 16.5h7"/></svg><span>My documents</span><span class="nav-count" id="ownedCount">0</span></button>
+        <button class="nav-link" id="sharedNav"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V19M16 5.5a3 3 0 0 1 0 5.8M17 13.2a4 4 0 0 1 3.5 4V19"/></svg><span>Shared with me</span><span class="nav-count" id="sharedCount">0</span></button>
+      </nav>
+      <div class="sidebar-label-row recent-label"><span id="listHeading">RECENT DOCUMENTS</span><button class="icon-button mini-button" id="refreshDocs" aria-label="Refresh documents" title="Refresh"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4L4 9"/><path d="M4 4v5h5M4 13a8 8 0 0 0 14 4l2-2M20 20v-5h-5"/></svg></button></div>
+      <div class="document-list" id="documentList" aria-label="Documents"></div>
+      <div class="sidebar-bottom">
+        <div class="storage-note"><div class="storage-icon"><svg viewBox="0 0 24 24"><path d="M4 7.5h16v12H4zM8 7.5V5h8v2.5M8 12h8"/></svg></div><div><strong>Your workspace</strong><span>Small docs, shared clearly.</span></div></div>
+        <div class="current-user-row" id="currentUserRow"><span class="avatar avatar-lavender" id="sidebarAvatar">AM</span><span class="user-copy"><strong id="sidebarUserName">Alice Morgan</strong><small id="sidebarUserEmail">alice@example.com</small></span><button class="icon-button mini-button" id="userMenuButton" aria-label="Switch user" title="Switch demo user"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="breadcrumbs"><button class="icon-button mobile-menu" id="openSidebar" aria-label="Open navigation"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><span class="crumb-muted">Collective</span><svg class="crumb-separator" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg><span class="crumb-current" id="crumbCurrent">My documents</span></div>
+        <div class="topbar-actions"><div class="connection-status" id="connectionStatus"><span></span> All changes saved</div><button class="button button-quiet" id="importButton"><svg viewBox="0 0 24 24"><path d="M12 15V3m-4 4 4-4 4 4M5 13v6h14v-6"/></svg><span>Import</span></button><input type="file" id="fileInput" accept=".txt,.md,text/plain,text/markdown" hidden><button class="button button-primary" id="newDocumentButton"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>New document</span></button></div>
+      </header>
+
+      <section class="welcome-strip" id="welcomeStrip">
+        <div class="welcome-copy"><div class="eyebrow"><span class="eyebrow-line"></span> A LITTLE MORE IN SYNC</div><h1 id="welcomeTitle">Good morning, Alice<span class="title-period">.</span></h1><p>Make space for the work that matters. Your team's notes, plans, and ideas live here.</p></div>
+        <div class="welcome-art" aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-paper paper-back"></div><div class="art-paper paper-front"><span></span><i></i><i></i><b></b><em></em></div><div class="art-sparkle sparkle-one">✳</div><div class="art-sparkle sparkle-two">✦</div></div>
+      </section>
+
+      <section class="home-content" id="homeContent">
+        <div class="section-heading"><div><div class="section-kicker">YOUR SPACE</div><h2 id="gridTitle">Pick up where you left off</h2></div><button class="text-button" id="viewAllButton">View all <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div>
+        <div class="document-grid" id="documentGrid"></div>
+        <div class="import-hint"><div class="hint-icon"><svg viewBox="0 0 24 24"><path d="M12 15V3m-4 4 4-4 4 4M5 13v6h14v-6"/></svg></div><div><strong>Starting with a file?</strong><p>Bring your notes along. Import a <code>.txt</code> or <code>.md</code> file and keep editing here.</p></div><button class="text-button" id="importHintButton">Import a file <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </section>
+
+      <section class="editor-view" id="editorView" hidden>
+        <div class="editor-header">
+          <div class="editor-title-wrap"><input class="document-title-input" id="documentTitle" value="Untitled document" maxlength="160" aria-label="Document title"><div class="document-meta"><span id="documentOwnerLabel">Owned by you</span><span class="meta-dot">·</span><span id="documentUpdatedLabel">Just created</span><span class="permission-pill" id="permissionPill">Owner</span></div></div>
+          <div class="editor-header-actions"><div class="avatar-stack" id="avatarStack" aria-label="People with access"></div><button class="button button-share" id="shareButton"><svg viewBox="0 0 24 24"><path d="M15 8a3 3 0 1 0-2.8-4M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM15 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="m12 8 1.5-1M12 10l1.5 4M6 13l6 4"/></svg> Share</button><button class="icon-button" id="moreButton" aria-label="More document actions" title="More actions"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button></div>
+        </div>
+        <div class="toolbar-wrap"><div class="format-toolbar" id="formatToolbar" role="toolbar" aria-label="Text formatting"><button class="format-button" data-command="undo" aria-label="Undo" title="Undo"><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h9a6 6 0 0 1 0 12h-2"/></svg></button><button class="format-button" data-command="redo" aria-label="Redo" title="Redo"><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5m5 5h-9a6 6 0 0 0 0 12h2"/></svg></button><span class="toolbar-divider"></span><select id="blockFormat" aria-label="Text style"><option value="p">Normal text</option><option value="h1">Heading 1</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option></select><span class="toolbar-divider"></span><button class="format-button format-letter" data-command="bold" aria-label="Bold" title="Bold"><strong>B</strong></button><button class="format-button format-letter italic-letter" data-command="italic" aria-label="Italic" title="Italic"><em>I</em></button><button class="format-button format-letter underline-letter" data-command="underline" aria-label="Underline" title="Underline"><u>U</u></button><span class="toolbar-divider"></span><button class="format-button" data-command="insertUnorderedList" aria-label="Bulleted list" title="Bulleted list"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4" cy="6" r=".8"/><circle cx="4" cy="12" r=".8"/><circle cx="4" cy="18" r=".8"/></svg></button><button class="format-button" data-command="insertOrderedList" aria-label="Numbered list" title="Numbered list"><svg viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10M3 5h2v3M3 12h2l-2 2h2M3 17h2l-2 2h2"/></svg></button><button class="format-button" data-command="formatBlock" data-value="blockquote" aria-label="Quote" title="Quote"><svg viewBox="0 0 24 24"><path d="M10 11H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5v7Zm11 0h-5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5v7ZM3 20c4-1 6-4 7-9m4 9c4-1 6-4 7-9"/></svg></button><span class="toolbar-spacer"></span><span class="editor-tool-note"><span class="autosave-dot"></span><span id="toolbarSaveLabel">Auto-saved</span></span></div></div>
+        <div class="paper-stage"><article class="document-paper"><div class="paper-topline"><span>COLLECTIVE NOTES</span><span id="paperDate"></span></div><div id="documentEditor" class="document-editor" contenteditable="true" spellcheck="true" role="textbox" aria-label="Document content" aria-multiline="true"><h1>Untitled document</h1><p>Start writing something worth sharing...</p></div><div class="paper-footer"><span>COMMONPAPER</span><span id="wordCount">0 words</span></div></article></div>
+        <div class="editor-bottom-bar"><span><kbd>⌘</kbd><kbd>S</kbd> Your work saves automatically</span><span id="lastSavedFooter">Ready when you are</span></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <div class="modal-backdrop" id="shareModal" hidden><section class="modal-card share-modal-card" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle"><div class="modal-heading"><div><div class="modal-icon"><svg viewBox="0 0 24 24"><path d="M15 8a3 3 0 1 0-2.8-4M9 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM15 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="m12 8 1.5-1M12 10l1.5 4M6 13l6 4"/></svg></div><div><h2 id="shareModalTitle">Share document</h2><p>Good work gets better together.</p></div></div><button class="icon-button" id="closeShareModal" aria-label="Close dialog"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="share-link-card"><div class="share-link-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20l1.1-1.1"/></svg></div><div><strong>Workspace access</strong><span>Only invited demo users can open this document.</span></div><span class="secure-label"><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Private</span></div><form id="shareForm" class="share-form"><label for="shareEmail">Add a person</label><div class="share-input-row"><select id="shareEmail" required aria-label="Person to share with"><option value="">Choose a demo user…</option></select><select id="shareRole" aria-label="Permission"><option value="editor">Can edit</option><option value="viewer">Can view</option></select><button type="submit" class="button button-primary" id="grantAccessButton">Invite</button></div><p class="form-help">Demo users: jordan@example.com and sam@example.com.</p></form><div class="shared-people-heading"><strong>People with access</strong><span id="sharePeopleCount">1 person</span></div><div class="shared-people-list" id="sharedPeopleList"></div><div class="modal-footnote">Sharing is simulated with seeded accounts for this assessment. No invitation email is sent.</div></section></div>
+
+  <div class="modal-backdrop" id="userModal" hidden><section class="modal-card user-modal-card" role="dialog" aria-modal="true" aria-labelledby="userModalTitle"><div class="modal-heading"><div><div class="modal-icon user-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div><div><h2 id="userModalTitle">Switch demo user</h2><p>See what each teammate can access.</p></div></div><button class="icon-button" id="closeUserModal" aria-label="Close dialog"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="demo-warning"><svg viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4zM12 9v5m0 3v.1"/></svg><span>Demo authentication only — these are seeded test users, not real accounts.</span></div><div class="user-choice-list" id="userChoiceList"></div></section></div>
+
+  <div class="modal-backdrop" id="deleteModal" hidden><section class="modal-card delete-modal-card" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle"><div class="modal-heading"><div><div class="modal-icon delete-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg></div><div><h2 id="deleteModalTitle">Delete this document?</h2><p>This removes the document and its shares from this workspace.</p></div></div><button class="icon-button" id="closeDeleteModal" aria-label="Close dialog"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div class="delete-actions"><button class="button button-quiet" id="cancelDelete">Keep document</button><button class="button button-danger" id="confirmDelete">Delete document</button></div></section></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
